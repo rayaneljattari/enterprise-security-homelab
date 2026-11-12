@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="790" viewBox="0 0 1200 790" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <title>Scheldt Logistics homelab architecture</title>
+  <defs>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f87171"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"/>
+    </marker>
+    <style>
+      .h { fill: #e2e8f0; font-weight: 600; font-size: 16px; }
+      .t { fill: #e2e8f0; font-size: 13px; }
+      .m { fill: #94a3b8; font-size: 12px; }
+      .ip { fill: #38bdf8; font-size: 13px; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+      .panel { fill: #111c33; stroke: #2a3a5c; stroke-width: 1.5; }
+      .node { fill: #16233f; stroke: #3b4f78; stroke-width: 1.5; }
+      .wire { stroke: #64748b; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="790" rx="16" fill="#0b1220"/>
+
+  <text x="40" y="50" fill="#f8fafc" font-size="24" font-weight="700">Lab architecture</text>
+  <text x="40" y="76" class="m">Scheldt Logistics NV (fictional client) · everything runs on one MacBook and one Raspberry Pi</text>
+
+  <!-- Internet and home router -->
+  <rect x="520" y="100" width="160" height="44" rx="22" class="node"/>
+  <text x="600" y="127" class="t" text-anchor="middle">Internet</text>
+  <line x1="600" y1="144" x2="600" y2="180" class="wire"/>
+  <rect x="490" y="180" width="220" height="50" rx="8" class="node"/>
+  <text x="600" y="202" class="t" text-anchor="middle">Home router</text>
+  <text x="600" y="220" class="m" text-anchor="middle">192.168.1.0/24</text>
+  <path d="M600,230 V250 H500 V290" class="wire"/>
+  <path d="M600,250 H1000 V290" class="wire"/>
+
+  <!-- MacBook panel -->
+  <rect x="40" y="290" width="760" height="470" rx="14" class="panel"/>
+  <text x="62" y="318" class="h">MacBook Pro M4 Pro · UTM (QEMU, ARM64 guests)</text>
+
+  <!-- GW01 -->
+  <line x1="500" y1="290" x2="500" y2="340" class="wire"/>
+  <text x="510" y="332" class="m">WAN · UTM shared network (NAT)</text>
+  <rect x="380" y="340" width="240" height="80" rx="10" class="node"/>
+  <text x="396" y="364" class="h">GW01</text>
+  <text x="604" y="364" class="ip" text-anchor="end">10.10.10.1</text>
+  <text x="396" y="384" class="t">Debian 13 router</text>
+  <text x="396" y="404" class="m">nftables · default-drop · NAT</text>
+  <line x1="500" y1="420" x2="500" y2="470" class="wire"/>
+
+  <!-- Lab network bar -->
+  <rect x="80" y="470" width="680" height="6" rx="3" fill="#38bdf8"/>
+  <text x="80" y="460" fill="#38bdf8" font-size="13" font-weight="600">Lab network 10.10.10.0/24 · UTM host-only, isolated from home LAN</text>
+
+  <!-- VM drops -->
+  <line x1="157" y1="476" x2="157" y2="510" class="wire"/>
+  <line x1="332" y1="476" x2="332" y2="510" class="wire"/>
+  <line x1="507" y1="476" x2="507" y2="510" class="wire"/>
+  <line x1="682" y1="476" x2="682" y2="510" class="wire"/>
+
+  <!-- DC01 -->
+  <rect x="80" y="510" width="155" height="112" rx="10" class="node"/>
+  <text x="94" y="534" class="h">DC01</text>
+  <text x="221" y="534" class="ip" text-anchor="end">.10</text>
+  <text x="94" y="556" class="t">Windows Server 2025</text>
+  <text x="94" y="576" class="m">AD DS · DNS</text>
+  <text x="94" y="594" class="m">Group Policy · LAPS</text>
+  <text x="94" y="612" class="m">ad.scheldt.lab</text>
+
+  <!-- CL01 -->
+  <rect x="255" y="510" width="155" height="112" rx="10" class="node"/>
+  <text x="269" y="534" class="h">CL01</text>
+  <text x="396" y="534" class="ip" text-anchor="end">.21</text>
+  <text x="269" y="556" class="t">Windows 11</text>
+  <text x="269" y="576" class="m">Domain workstation</text>
+  <text x="269" y="594" class="m">RSAT admin tools</text>
+  <text x="269" y="612" class="m">PingCastle</text>
+
+  <!-- SIEM01 -->
+  <rect x="430" y="510" width="155" height="112" rx="10" class="node" stroke="#34d399"/>
+  <text x="444" y="534" class="h">SIEM01</text>
+  <text x="571" y="534" class="ip" text-anchor="end">.30</text>
+  <text x="444" y="556" class="t">Ubuntu 24.04</text>
+  <text x="444" y="576" class="m">Wazuh manager</text>
+  <text x="444" y="594" class="m">indexer · dashboard</text>
+  <text x="444" y="612" class="m">https://10.10.10.30</text>
+
+  <!-- KALI01 -->
+  <rect x="605" y="510" width="155" height="112" rx="10" class="node" stroke="#f87171"/>
+  <text x="619" y="534" class="h">KALI01</text>
+  <text x="746" y="534" class="ip" text-anchor="end">.66</text>
+  <text x="619" y="556" class="t">Kali Linux</text>
+  <text x="619" y="576" class="m">nmap · netexec</text>
+  <text x="619" y="594" class="m">kerbrute</text>
+  <text x="619" y="612" class="m">in-scope: lab only</text>
+
+  <!-- Wazuh agent flows -->
+  <path d="M200,622 V660 H490" stroke="#34d399" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+  <path d="M332,622 V660" stroke="#34d399" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+  <path d="M490,660 V626" stroke="#34d399" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow-green)"/>
+  <text x="214" y="680" fill="#34d399" font-size="12">Wazuh agents → 1514/tcp</text>
+
+  <!-- Attack flow -->
+  <path d="M682,622 V715 H120 V626" stroke="#f87171" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow-red)"/>
+  <text x="140" y="740" fill="#f87171" font-size="12">Attack simulation: port scan · SMB and Kerberos enumeration · password spray</text>
+
+  <!-- Raspberry Pi panel -->
+  <rect x="830" y="290" width="330" height="470" rx="14" class="panel"/>
+  <text x="852" y="318" class="h">Home LAN · physical</text>
+
+  <rect x="852" y="340" width="286" height="250" rx="10" class="node" stroke="#fbbf24"/>
+  <text x="868" y="366" class="h">pi01 · Raspberry Pi</text>
+  <text x="868" y="386" class="m">Raspberry Pi OS Lite 64-bit · Docker</text>
+
+  <rect x="868" y="402" width="254" height="34" rx="6" fill="#0b1220" stroke="#3b4f78"/>
+  <text x="882" y="424" class="t">Pi-hole</text>
+  <text x="1108" y="424" class="m" text-anchor="end">DNS filtering · 53</text>
+  <rect x="868" y="444" width="254" height="34" rx="6" fill="#0b1220" stroke="#3b4f78"/>
+  <text x="882" y="466" class="t">WireGuard</text>
+  <text x="1108" y="466" class="m" text-anchor="end">VPN · 51820/udp</text>
+  <rect x="868" y="486" width="254" height="34" rx="6" fill="#0b1220" stroke="#3b4f78"/>
+  <text x="882" y="508" class="t">Uptime Kuma</text>
+  <text x="1108" y="508" class="m" text-anchor="end">monitoring · 3001</text>
+
+  <text x="868" y="550" fill="#fbbf24" font-size="12" font-weight="600">Host hardening</text>
+  <text x="868" y="570" class="m">ufw default-deny · fail2ban · SSH keys only</text>
+
+  <rect x="890" y="660" width="210" height="56" rx="10" class="node"/>
+  <text x="995" y="684" class="t" text-anchor="middle">Phone / laptop on the road</text>
+  <text x="995" y="703" class="m" text-anchor="middle">WireGuard client</text>
+  <path d="M995,660 V594" stroke="#fbbf24" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow-amber)"/>
+  <text x="1005" y="632" fill="#fbbf24" font-size="12">encrypted tunnel</text>
+</svg>

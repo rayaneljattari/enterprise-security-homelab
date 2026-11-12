@@ -1,0 +1,5 @@
+# Append to /etc/network/interfaces on GW01 (Debian ARM64)
+# Replace LAN_IF with the Host Only interface name from `ip -br a`
+auto LAN_IF
+iface LAN_IF inet static
+    address 10.10.10.1/24

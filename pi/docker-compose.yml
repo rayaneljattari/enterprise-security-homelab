@@ -1,0 +1,48 @@
+# Raspberry Pi edge services. Install Docker first:  curl -fsSL https://get.docker.com | sh
+# Copy .env.example to .env, fill it in, then:  docker compose up -d
+# Note: Docker publishes ports past ufw rules; keep the Pi behind your home router (no port forwards except 51820/udp).
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+    environment:
+      TZ: Europe/Brussels
+      FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD}
+      FTLCONF_dns_listeningMode: all
+    volumes:
+      - ./pihole:/etc/pihole
+    restart: unless-stopped
+
+  wireguard:
+    image: ghcr.io/wg-easy/wg-easy:14
+    container_name: wg-easy
+    environment:
+      WG_HOST: ${WG_HOST}
+      PASSWORD_HASH: ${WG_PASSWORD_HASH}
+      WG_DEFAULT_DNS: ${PI_IP}
+      WG_ALLOWED_IPS: 192.168.0.0/16, 10.10.10.0/24
+    volumes:
+      - ./wireguard:/etc/wireguard
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./uptime-kuma:/app/data
+    restart: unless-stopped

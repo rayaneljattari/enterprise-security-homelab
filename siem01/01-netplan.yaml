@@ -1,0 +1,14 @@
+# /etc/netplan/50-lab.yaml on SIEM01 (Ubuntu Server 24.04 ARM64)
+# Replace LAN_IF with the interface name from `ip -br a`, then: sudo netplan apply
+network:
+  version: 2
+  ethernets:
+    LAN_IF:
+      dhcp4: false
+      addresses: [10.10.10.30/24]
+      routes:
+        - to: default
+          via: 10.10.10.1
+      nameservers:
+        addresses: [10.10.10.10]
+        search: [ad.scheldt.lab]

@@ -1,0 +1,22 @@
+# Never commit passwords, exported users, keys or VM images
+*.csv
+*.key
+*.pem
+*.iso
+*.utm/
+.env
+
+# Wazuh installer output contains all generated passwords
+wazuh-install-files.tar
+wazuh-passwords.txt
+
+# PingCastle raw reports contain domain details; commit a redacted screenshot instead
+ad_hc_*.xml
+ad_hc_*.html
+
+# Raspberry Pi container data (WireGuard keys, Pi-hole config)
+pi/pihole/
+pi/wireguard/
+pi/uptime-kuma/
+
+.DS_Store
