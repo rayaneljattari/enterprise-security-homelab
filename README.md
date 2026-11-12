@@ -1,16 +1,4 @@
-<p align="center">
-  <img src="docs/images/banner.svg" alt="Enterprise Security Homelab: build, harden, attack and monitor a small company network" width="100%">
-</p>
-
-<p align="center">
-  <img alt="Active Directory" src="https://img.shields.io/badge/Active_Directory-Windows_Server_2025-0078D4?style=flat-square">
-  <img alt="Wazuh" src="https://img.shields.io/badge/SIEM-Wazuh_4.x-1F8ACB?style=flat-square">
-  <img alt="Kali Linux" src="https://img.shields.io/badge/Attack_sim-Kali_Linux-557C94?style=flat-square">
-  <img alt="Debian nftables" src="https://img.shields.io/badge/Firewall-nftables-A81D33?style=flat-square">
-  <img alt="Raspberry Pi" src="https://img.shields.io/badge/Edge-Raspberry_Pi-C51A4A?style=flat-square">
-  <img alt="PowerShell" src="https://img.shields.io/badge/Automation-PowerShell-5391FE?style=flat-square">
-  <img alt="Status" src="https://img.shields.io/badge/status-build_in_progress-F59E0B?style=flat-square">
-</p>
+# Enterprise security homelab
 
 A small but complete company network that I design, harden, attack and monitor myself, run on one
 MacBook (UTM) and one Raspberry Pi. I treat it as a consulting engagement for a fictional client, so
@@ -31,9 +19,7 @@ alerting, and prove that the detection works by attacking the network myself.
 
 ## Architecture
 
-<p align="center">
-  <img src="docs/images/architecture.svg" alt="Lab architecture: GW01 router, DC01, CL01, SIEM01 and KALI01 on 10.10.10.0/24 inside UTM on a MacBook, plus a Raspberry Pi on the home LAN" width="100%">
-</p>
+![Lab architecture: GW01 router, DC01, CL01, SIEM01 and KALI01 on 10.10.10.0/24 inside UTM on a MacBook, plus a Raspberry Pi on the home LAN](docs/images/architecture.svg)
 
 | Host | Platform | Role | IP |
 |---|---|---|---|
