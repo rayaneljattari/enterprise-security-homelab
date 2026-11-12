@@ -4,8 +4,6 @@
 
 ![Architecture](images/architecture.svg)
 
-Source: [architecture.drawio](images/architecture.drawio), open it in [draw.io](https://app.diagrams.net) to edit, then export as SVG over `architecture.svg`.
-
 ## Design goals
 
 - **Everything on hardware I already own.** One MacBook Pro M4 Pro running UTM, one Raspberry Pi. No server, no paid cloud.
