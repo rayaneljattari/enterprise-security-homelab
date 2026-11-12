@@ -91,19 +91,22 @@ Windows Security log, so the SIEM only sees the attack once credentials are trie
 steps needs network-level detection, which is on the [roadmap](#roadmap). Expected events are listed in
 [attack and detection](docs/attack-and-detection.md); what Wazuh really showed goes next to them after the run.
 
-## Results
+## Expected results
 
-Filled in after the build. Until then these are targets, not results.
+These are the **targets** each part of the lab must hit, written before the build so I test against
+something concrete. The "Measured" column stays empty until I have run the check myself.
 
-| Check | Expected | Result |
+| Check | Target | Measured |
 |---|---|---|
-| Lab reaches the internet through GW01 only | `TcpTestSucceeded : True` | _pending_ |
-| Domain DNS and DC SRV record resolve | `10.10.10.10`, `dc01.ad.scheldt.lab` | _pending_ |
-| 60 users in department OUs | 60 | _pending_ |
-| LAPS password stored in AD for CL01 | password and expiry returned | _pending_ |
-| Tier 0 admin cannot log on to CL01 | logon refused | _pending_ |
-| Password spray shows up in Wazuh | alerts on DC01 agent | _pending_ |
-| PingCastle risk score | lower after hardening | _before: ? / after: ?_ |
+| Lab reaches the internet through GW01 only | `TcpTestSucceeded : True` from CL01; nothing reachable from the WAN side | |
+| Domain DNS and DC SRV record resolve | `10.10.10.10` and `dc01.ad.scheldt.lab` | |
+| 60 users in department OUs | `60` | |
+| LAPS password stored in AD for CL01 | password and expiry returned | |
+| Tier 0 admin cannot log on to CL01 | logon refused | |
+| `10-Test-Lab.ps1` | 8 of 8 PASS | |
+| Wazuh agents | DC01 and CL01 `active` | |
+| Password spray shows up in Wazuh | rule 60122 per failed logon, rule 60204 for the burst, on agent DC01 | |
+| PingCastle global risk score | lower after hardening than before; aim for 30 or below | before: / after: |
 
 Full list with commands: [docs/test-plan.md](docs/test-plan.md).
 

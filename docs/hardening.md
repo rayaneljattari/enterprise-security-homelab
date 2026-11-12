@@ -3,15 +3,19 @@
 [Back to README](../README.md)
 
 Measured with PingCastle before and after. The before report is taken on the fresh domain, right after
-the users are created.
+the users are created. Targets are set in advance; the measured columns are filled in from my own reports.
 
-| PingCastle | Before | After |
-|---|---|---|
-| Global risk score (lower is better) | _to measure_ | _to measure_ |
-| Stale objects | _to measure_ | _to measure_ |
-| Privileged accounts | _to measure_ | _to measure_ |
-| Trusts | _to measure_ | _to measure_ |
-| Anomalies | _to measure_ | _to measure_ |
+| PingCastle (lower is better) | Target after hardening | Measured before | Measured after |
+|---|---|---|---|
+| Global risk score | lower than before, aim for 30 or below | | |
+| Stale objects | lower than before | | |
+| Privileged accounts | lower than before | | |
+| Trusts | 0 (no trusts in this lab) | | |
+| Anomalies | lower than before | | |
+
+What should move the score: LAPS, Print Spooler off on the DC, admins in Protected Users, audit policy.
+What will likely remain: a single DC, no AD backup, and the built-in Administrator account still in use.
+Those go in the report as accepted lab risks.
 
 ## 1. Password and lockout policy
 

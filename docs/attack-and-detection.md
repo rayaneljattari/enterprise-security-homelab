@@ -14,15 +14,15 @@ accounts. The question for the client: **would anyone notice?**
 
 ## Steps, techniques and expected evidence
 
-The "Expected" columns come from how Windows auditing and Wazuh's default ruleset work. The "Observed"
-column is filled in from my own run, including anything that did not trigger.
+The "Expected" columns are targets, based on how Windows auditing and Wazuh's default ruleset work. The
+"Observed" column is filled in from my own run, including anything that did not trigger.
 
 | # | Step | Tool | MITRE ATT&CK | Expected on DC01 | Expected in Wazuh | Observed |
 |---|---|---|---|---|---|---|
-| 1 | Service scan of the subnet | `nmap -sV` | T1046 Network Service Discovery | nothing in the Security log | nothing | _pending_ |
-| 2 | SMB enumeration (signing, OS, shares) | `netexec smb` | T1135 Network Share Discovery | possibly anonymous logons | little or nothing | _pending_ |
-| 3 | Username enumeration via Kerberos | `kerbrute userenum` | T1087.002 Account Discovery: Domain Account | 4768 requests, including failures for unknown users | depends on rule coverage | _pending_ |
-| 4 | Password spray over SMB | `netexec smb -p` | T1110.003 Password Spraying | burst of 4625 and 4776 failures across many users | logon failure alerts, then a multiple-failures alert | _pending_ |
+| 1 | Service scan of the subnet | `nmap -sV` | T1046 Network Service Discovery | nothing in the Security log | nothing | |
+| 2 | SMB enumeration (signing, OS, shares) | `netexec smb` | T1135 Network Share Discovery | possibly anonymous logons | little or nothing | |
+| 3 | Username enumeration via Kerberos | `kerbrute userenum` | T1087.002 Account Discovery: Domain Account | 4768 requests, including failures for unknown users | depends on rule coverage | |
+| 4 | Password spray over SMB | `netexec smb -p` | T1110.003 Password Spraying | burst of 4625 and 4776 failures across many users | rule 60122 (logon failure) per attempt, rule 60204 (multiple logon failures) for the burst | |
 
 ## How I check it in Wazuh
 
@@ -31,9 +31,10 @@ column is filled in from my own run, including anything that did not trigger.
 3. Look at `rule.groups: authentication_failed` and the Windows event IDs above.
 4. Note the rule IDs and levels that fired in the table below.
 
-| Wazuh rule ID | Description | Level | Count during spray |
+| Wazuh rule ID | Description | Level (default ruleset) | Measured count during spray |
 |---|---|---|---|
-| _fill in_ | | | |
+| 60122 (target) | Windows logon failure: unknown user or bad password | 5 | |
+| 60204 (target) | Multiple Windows logon failures | 10 | |
 
 ## Gaps I expect to find
 
