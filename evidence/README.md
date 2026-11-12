@@ -26,4 +26,4 @@ Text output (nmap, netexec, kerbrute) can go in as `.txt` files from `~/evidence
 - No passwords, `.env` files, `lab-users.csv`, private keys or WireGuard configs. `.gitignore` blocks most
   of them, but check `git status` before every commit.
 - File names without spaces, numbered so they sort in the order of the README.
-- After adding screenshots, update the Results table and Screenshots section in the main README.
+- After adding screenshots, fill in the Measured column of the Expected results table and the Screenshots section in the main README.

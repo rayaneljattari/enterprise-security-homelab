@@ -18,7 +18,7 @@ every technical choice is tied to a business problem and written down the way a 
 
 > **Status (November 2026):** design, configs and scripts are done and in this repo. I am building the
 > lab now. The [test plan](docs/test-plan.md) and the [evidence](evidence/) folder fill up as each part
-> is verified; nothing in the results column is claimed before I have run it.
+> is verified; the "Measured" columns stay empty until I have run each check myself.
 
 ## The client
 
