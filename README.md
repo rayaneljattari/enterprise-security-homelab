@@ -1,4 +1,4 @@
-# Enterprise security homelab
+![Enterprise security homelab: build, harden, attack and monitor a small company network](docs/images/banner.svg)
 
 A small but complete company network that I design, harden, attack and monitor myself, run on one
 MacBook (UTM) and one Raspberry Pi. I treat it as a consulting engagement for a fictional client, so

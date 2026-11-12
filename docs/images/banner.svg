@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="170" viewBox="0 0 900 170" font-family="Helvetica, Arial, sans-serif">
+  <title>Enterprise security homelab</title>
+  <rect x="0.5" y="0.5" width="899" height="169" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="30" y="62" fill="#000000" font-size="32" font-weight="bold">Enterprise security homelab</text>
+  <text x="30" y="96" fill="#333333" font-size="17">Build, harden, attack and monitor a small company network</text>
+  <text x="30" y="132" fill="#333333" font-size="14">Active Directory · Group Policy · Windows LAPS · Wazuh SIEM · Kali Linux · nftables · Raspberry Pi</text>
+  <text x="30" y="154" fill="#666666" font-size="13">Fictional client: Scheldt Logistics NV, Antwerp</text>
+</svg>
